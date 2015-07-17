@@ -1,0 +1,51 @@
+<legend>Profile</legend>
+<%= form_for @info, :url => user_path(@user), :remote  => true, :method => 'patch' do |f| %>
+<table class="mytable table-hover" id="profile_table">
+  <tr id="username">
+    <td class="text-right text-muted" width="100">Nickname</td>
+    <td><%= f.text_field :username, :value => @user.information.username, :class => "form-control input-sm" %></td>
+  </tr>
+  <tr id="email">
+    <td class="text-right text-muted" width="100">E-mail</td>
+    <td><%= @user.email %></td>
+  </tr>
+  <tr id="location">
+    <td class="text-right text-muted" width="100">Location</td>
+    <td><%= f.text_field :location, :value => @user.information.location, :class => "form-control input-sm" %></td>
+  </tr>
+  <tr id="gender">
+    <td class="text-right text-muted" width="100">Gender</td>
+    <td>
+      <%= f.radio_button :gender, 'male' %>Male
+      <%= f.radio_button :gender, 'female' %>Female
+    </td>
+  </tr>
+  <tr id="birthday">
+    <td class="text-right text-muted" width="100">Birthday</td>
+    <td><%= f.date_select :birthday %></td>
+  </tr>
+  <tr id="blog">
+    <td class="text-right text-muted" width="100">Blog</td>
+    <td><%= f.text_field :blog, :value => @user.information.blog, :class => "form-control input-sm" %></td>
+  </tr>
+  <tr id="about">
+    <td class="text-right text-muted" width="100">About</td>
+    <td><%= f.text_field :about, :value => @user.information.about, :class => "form-control input-sm" %></td>
+  </tr>
+  <tr id="yo_year">
+    <td class="text-right text-muted" width="100">Yo-years</td>
+    <td><%= Time.now.year - @user.created_at.year %></td>
+  </tr>
+  <tr id="created_date">
+    <td class="text-right text-muted" width="100">Join on</td>
+    <td><%= @user.created_at.strftime("%d %b. %Y") %></td>
+  </tr>
+</table>
+<% if current_user.id == @user.id %>
+  <div class="row-fluid">
+    <div class="col-md-2 col-md-offset-5">
+      <%= f.submit 'Save', remote: true, :class => "btn btn-default" %>
+    </div>
+  </div>
+<% end %>
+<% end %>

@@ -1,0 +1,61 @@
+<div class="row-fluid">
+  <div class="col-md-12" >
+    <%= link_to image_tag(@user.information.avatar_url(:large), class:"img-rounded center-block", title: "Change avatar", :width => IMG_SIZE_LARGE, :height => IMG_SIZE_LARGE), user_path(@user, :operation => "4") %>
+
+    <h2 class="text-center" id="username_h"><%= @user.information.username %></h2>
+    <% if Friend.exists?(:userf_id => current_user.id ,:usert_id => @user.id) %>
+      <%= button_to 'Unfollow', user_friends_path(@user), :method => 'post', :class => "btn btn-default btn-sm btn-block" %>
+    <% elsif @user.id != current_user.id%>
+      <%= button_to 'Follow', user_friends_path(@user), :method => 'post', :class => "btn btn-info btn-sm btn-block" %>
+    <% end %>
+    <hr />
+    <table class="vard-stats">
+      <tr>
+        <td class="text-right text-muted td-xs" width="20">
+          <%= content_tag('i', nil, class: "fa fa-envelope-o fa-fw") %>
+        </td>
+        <td class="td-xs" id="email_td"><%= @user.email %></td>
+      </tr>
+      <% if @user.information.location != " " %>
+      <tr>
+        <td class="text-right text-muted td-xs" width="20">
+          <%= content_tag('i', nil, class: "fa fa-location-arrow fa-fw") %>
+        </td>
+        <td class="td-xs" id="location_td"><%= @user.information.location %></td>
+      </tr>
+      <% end %>
+      <% if @user.information.gender != " " %>
+      <tr>
+        <td class="text-right text-muted td-xs" width="20">
+          <% cls = "fa fa-" + @user.information.gender + " fa-fw" %>
+          <%= content_tag('i', nil, class: cls) %>
+        </td>
+        <td class="td-xs" id="gender_td"><%= @user.information.gender %></td>
+      </tr>
+      <% end %>
+      <tr>
+        <td class="text-right text-muted td-xs" width="20">
+          <%= content_tag('i', nil, class: "fa fa-clock-o fa-fw") %>
+        </td>
+        <td class="td-xs">Joined on <%= @user.created_at.strftime("%d %b. %Y") %></td>
+      </tr>
+      <tr>
+        <td class="text-right text-muted td-xs" width="20"></td>
+        <td class="text-right td-xs"><%= link_to t('More information') + content_tag('i', nil, class: "fa fa-angle-double-right fa-fw"), user_path(@user, :operation => "0"), :class => "vcard-stat text-muted" %></td>
+      </tr>
+    </table>
+    <table class="mytable">
+      <tr>
+        <td>
+          <%= link_to content_tag('h1', @fans.count, class: "text-center") + content_tag('h6', "Followers", class: "text-center text-muted"), user_path(@user, :operation => "1"), :class => "vcard-stat" %>
+        </td>
+        <td>
+          <%= link_to content_tag('h1', @focus.count, class: "text-center") + content_tag('h6', "Following", class: "text-center text-muted"), user_path(@user, :operation => "2"), :class => "vcard-stat" %>
+        </td>
+        <td>
+          <%= link_to content_tag('h1', @user.yochats.count, class: "text-center") + content_tag('h6', "YoChat", class: "text-center text-muted"), user_path(@user), :class => "vcard-stat" %>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

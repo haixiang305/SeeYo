@@ -1,0 +1,50 @@
+<% messages.each do |message| %>
+    <% if message.classes == 'comment' %>
+        <div style='background-color: #FFC; margin:10px; padding: 7px; border-radius: 5px'>
+            <div style='float: right'><%= message.created_at %></div>
+            <% user = User.find(message.sender_id) %>
+            <p>sender:&nbsp;<%= link_to user.information.username, user_path(user) %></p>
+            <div style='float: right'><%= button_to 'Delete', admin_message_path(message), :method => 'delete' %></div>
+            <% yochat = Yochat.find_by_id(message.msg_id) %>
+            <% if !yochat.nil? %>
+                <strong>@your Comment: -> <%= link_to 'Yochat', yochat_path(yochat) %></strong>
+            <% else %>
+                <strong>@your Comment: -> Yochat not Found</strong>
+            <% end %>
+            <%= simple_format(message.content) %>
+        </div>
+    <% elsif message.classes == 'fans' %>
+        <div style='background-color: #DFD; margin:10px; padding: 7px; border-radius: 5px'>
+            <div style='float: right'><%= message.created_at %></div>
+            <% user = User.find(message.sender_id) %>
+            <p>sender:&nbsp;<%= link_to user.information.username, user_path(user) %></p>
+            <div style='float: right'><%= button_to 'Delete', admin_message_path(message), :method => 'delete' %></div>
+            <strong>Add you as YoFriends</strong>
+            <%= simple_format(message.content) %>
+        </div>
+    <% elsif message.classes == 'yochat' %>
+        <div style='background-color: #DDF; margin:10px; padding: 7px; border-radius: 5px'>
+            <div style='float: right'><%= message.created_at %></div>
+            <% user = User.find(message.sender_id) %>
+            <p>sender:&nbsp;<%= link_to user.information.username, user_path(user) %></p>
+            <div style='float: right'><%= button_to 'Delete', admin_message_path(message), :method => 'delete' %></div>
+            <% yochat = Yochat.find_by_id(message.msg_id) %>
+            <% if !yochat.nil? %>
+                <strong>@your Yochat: -> &nbsp;<%= link_to 'Yochat', yochat_path(yochat) %></strong>
+            <% else %>
+                <strong>@your Yochat: -> Yochat not Found</strong>
+            <% end %>
+            <%= simple_format(message.content) %>
+        </div>
+    <% elsif message.classes == 'system' %>
+        <div style='background-color: #FDD; margin:10px; padding: 7px; border-radius: 5px'>
+            <div style='float: right'><%= message.created_at %></div>
+            <p>sender:<strong style='color:red; margin-left:10px'>Admin</strong></p>
+            <div style='float: right'><%= button_to 'Delete', admin_message_path(message), :method => 'delete' %></div>
+            <% if !message.msg_id.nil?%>
+                <p>@your:&nbsp;<%= link_to 'Link', yochat_path(Yochat.find(message.msg_id)) %></p>
+            <% end %>
+            <%= simple_format(message.content) %>
+        </div>
+    <% end %>
+<% end %>

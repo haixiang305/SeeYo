@@ -1,0 +1,23 @@
+<div class="row-fluid" id="user_div<%= user.id %>">
+  <div class="col-md-2">
+    <%= link_to image_tag(user.information.avatar_url(:normal)), user_path(user) %>
+  </div>
+  <div class="col-md-6">
+    <%= link_to user.information.username, user_path(user) %>
+    <p><%= user.information.about %></p>
+  </div>
+  <div class="col-md-4">
+    <% if current_user.id.to_s == params[:id] %>
+      <% if @block_title == "Following" %>
+        <%= button_to 'unfollowing', user_friend_path(current_user, user), :method => 'delete', :class => "btn btn-default btn-lg" %>
+      <% end %>
+      <% if @block_title == "Followers" %>
+        <%= button_to 'remove follower', user_friend_path(user, current_user), :method => 'delete', :class => "btn btn-default btn-lg" %>
+      <% end %>
+    <% end %>
+  </div>
+    <hr />
+    <hr />
+    <hr />
+    <hr />
+</div>

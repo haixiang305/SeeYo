@@ -1,0 +1,10 @@
+var button = $('#profileEditButton')[0];
+var tables = $('#profile_div');
+
+if (button.value == "Edit") {
+  button.value = "Save";
+  tables.html("<%= escape_javascript(render :partial => 'staticpages/profileEdit') %>");
+} else if (button.value == "Save"){
+  button.value = "Edit";
+  tables.html("<%= escape_javascript(render :partial => 'staticpages/profileShow') %>");
+}

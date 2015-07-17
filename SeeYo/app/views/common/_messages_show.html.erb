@@ -1,0 +1,53 @@
+<div class="row-fluid">
+  <div class="col-md-12" >
+    <legend><%= @block_title %></legend>
+    <% @messages.each do |message| %>
+    <% if message.classes == 'comment' %>
+    <div class="alert alert-warning" role="alert">
+      <% user = User.find(message.sender_id) %>
+      <p>sender: <%= link_to user.information.username, user_path(user) %></p>
+      <% yochat = Yochat.find_by_id(message.msg_id) %>
+      <% if !yochat.nil? %>
+      <strong>@your Comment: -> <%= link_to 'Yochat', yochat_path(yochat) %></strong>
+      <% else %>
+      <strong>@your Comment: -> Yochat not Found</strong>
+      <% end %>
+      <p>content:</p><p> -> <%= message.content %> </p>
+      <p>time: <%= l message.created_at, :format => :short %></p>
+    </div>
+    <% elsif message.classes == 'fans' %>
+    <div class="alert alert-success" role="alert">
+      <% user = User.find(message.sender_id) %>
+      <p>sender: <%= link_to user.information.username, user_path(user) %></p>
+      <strong>Add you as YoFriends</strong>
+      <p>time: <%= l message.created_at, :format => :short %></p>
+    </div>
+    <% elsif message.classes == 'yochat' %>
+    <div class="alert alert-info" role="alert">
+      <% user = User.find(message.sender_id) %>
+      <p>sender: <%= link_to user.information.username, user_path(user) %></p>
+      <% yochat = Yochat.find_by_id(message.msg_id) %>
+      <% if !yochat.nil? %>
+      <strong>@your Yochat: -> <%= link_to 'Yochat', yochat_path(yochat) %></strong>
+      <% else %>
+      <strong>@your Yochat: -> Yochat not Found</strong>
+      <% end %>
+      <p>content:</p><p> -> <%= message.content %> </p>
+      <p>time: <%= l message.created_at, :format => :short %></p>
+    </div>
+    <% elsif message.classes == 'system' %>
+    <div class="alert alert-danger" role="alert">
+      <p>sender:<strong style='color:red; margin-left:10px'>Admin</strong></p>
+      <% if !message.msg_id.nil?%>
+      <p>@your: <%= link_to 'Link', yochat_path(Yochat.find(message.msg_id)) %></p>
+      <% end %>
+      <p>content:</p><p> -> <%= message.content %> </p>
+      <p>time: <%= l message.created_at, :format => :short %></p>
+    </div>
+    <% end %>
+    <% end %>
+    <hr/>
+    <%= paginate @messages %>
+
+  </div>
+</div>

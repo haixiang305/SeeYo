@@ -1,0 +1,6 @@
+<h1>Create Message</h1>
+<%= form_for @message, :url => admin_user_path(@user), :method => 'patch' do |f| %>
+    <p><%= f.label :content, 'message' %></p>
+    <p><%= f.text_area :content %></p>
+    <%= f.submit 'publish' %>
+<% end %>

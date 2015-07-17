@@ -1,0 +1,11 @@
+$("#comment_submit_area")[0].value = "";
+$("#comment_show_div<%= @comment.yochat.id %>").prepend("<%= escape_javascript(render @comment) %>");
+$("#new_comment").prepend("<%= escape_javascript(render :partial => 'common/float_window') %>");
+
+$("#comment_button<%= @comment.yochat.id %>")[0].value = "Comment (" + <%= @comment.yochat.comments.count.to_s %> + ")";
+
+$("#comment_div<%= @comment.id %>").hide();
+$("#comment_div<%= @comment.id %>").fadeIn(1500);
+$("#float_window_div").fadeIn();
+setTimeout("$('#float_window_div').fadeOut()", 1000);
+setTimeout("$('#float_window_div').remove()", 1500);

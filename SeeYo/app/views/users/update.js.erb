@@ -1,0 +1,11 @@
+if (<%= @return %> == "1") {
+$('#user_show_div').html("<%= escape_javascript(render :partial => 'common/profile_show') %>");
+$("#username_h").html("<%= @info.username %>");
+$("#location_td").html("<%= @info.location %>");
+$("#gender_td").html("<%= @info.gender %>");
+}
+
+$("#user_show_div").prepend("<%= escape_javascript(render :partial => 'common/float_window') %>");
+$("#float_window_div").fadeIn();
+setTimeout("$('#float_window_div').fadeOut()", 1000);
+setTimeout("$('#float_window_div').remove()", 1500);

@@ -1,0 +1,23 @@
+<div style='float:right; margin:5px'><%= link_to 'Logout', destroy_user_session_path, :method => 'delete' %></div>
+<div style='float:right; margin:5px'><%= link_to 'Messages', admin_messages_path %></div>
+<div style='float:right; margin:5px'><%= link_to 'Comments', admin_comments_path %></div>
+<div style='float:right; margin:5px'><%= link_to 'Yochats', admin_yochats_path %></div>
+<div style='float:right; margin:5px'><%= link_to 'Users', admin_users_path %></div>
+
+<h1>SeeYo Secrets</h1>
+<h2>List of Comments</h2>
+<% @comments.each do |comment| %>
+    <div style='background-color: #FFC; margin:10px; padding: 7px; border-radius: 5px'>
+        <div style='position:relative; float:left; left:-10px; top:-10px'><%= comment.id %></div>
+        <div style='float: right'><%= comment.created_at %></div>
+        <strong><%= comment.user.information.username %>
+        <% if !comment.ater_id.nil? %>
+            @ <%= User.find(comment.ater_id).information.username %>
+        <% end %>
+        </strong>
+        <div style='font-family:Arial; padding-left: 15px'><%= simple_format(comment.content) %></div>
+        <%= link_to 'Alarm', edit_admin_comment_path(comment) %>
+    </div>
+<% end %>
+<hr/>
+<%= paginate @comments %>

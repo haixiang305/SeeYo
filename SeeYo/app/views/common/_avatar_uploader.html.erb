@@ -1,0 +1,34 @@
+<div class="row">
+  <div class="col-md-12" >
+    <legend><%= @block_title %></legend>
+    <div class="row">
+      <div class="col-md-12" id="avatar_div">
+        <%= form_for @info, :url => user_path(@user) do |f| %>
+    <div class="row">
+      <div class="col-md-6">
+          <%= f.label "Select local image: " %>
+          <div class="input-group">
+          <%= f.file_field :avatar, :accept => "image/*", :id => "avatar_file_reader", :onchange => "avatar_preview()"%>
+      <span class="input-group-btn">
+              <%= f.submit 'Upload',remote: true,  :class => "btn btn-info btn-sm", :style => "display:none", :id => "upload_button" %>
+      </span>
+          <%= f.hidden_field :avatar_cache %>
+        </div>
+        </div>
+        </div>
+          <%= f.label "Preview: " %>
+          <div class="row">
+            <div class="col-md-12" >
+              <%= f.label "Large: " %>
+              <%= image_tag(@info.avatar_url(:large), :id => "avatar_pre_large", :width => IMG_SIZE_LARGE, :height => IMG_SIZE_LARGE, :class => "img-rounded") %>
+              <%= f.label "Normal: " %>
+              <%= image_tag(@info.avatar_url(:normal), :id => "avatar_pre_normal", :width => IMG_SIZE_NORMAL, :height => IMG_SIZE_NORMAL, :class => "img-rounded") %>
+              <%= f.label "Small: " %>
+              <%= image_tag(@info.avatar_url(:small), :id => "avatar_pre_small", :width => IMG_SIZE_SMALL, :height => IMG_SIZE_SMALL, :class => "img-rounded" )%>
+            </div>
+          </div>
+        <%end%>
+      </div>
+    </div>
+  </div>
+</div>

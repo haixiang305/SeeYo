@@ -1,0 +1,6 @@
+$.each($('#nav_ul')[0].childNodes, function(i,val){      
+  val.className="";
+}); 
+
+$('#<%= @active_li %>')[0].className = "active";
+$("#yochats_div").html("<%= escape_javascript(render @yochats) %>");

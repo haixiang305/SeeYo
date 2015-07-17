@@ -1,0 +1,3 @@
+$("#comment_div<%= @comment_id %>").remove();
+//var cnt = parseInt($("#yochat_count").html()) - 1;
+$("#comment_button<%= @yochat.id %>")[0].value = "Comment (" + <%= @yochat.comments.count.to_s %> + ")";

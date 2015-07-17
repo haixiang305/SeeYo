@@ -1,0 +1,11 @@
+<div style='float:right; margin:5px'><%= link_to 'Logout', destroy_user_session_path, :method => 'delete' %></div>
+<div style='float:right; margin:5px'><%= link_to 'Messages', admin_messages_path %></div>
+<div style='float:right; margin:5px'><%= link_to 'Comments', admin_comments_path %></div>
+<div style='float:right; margin:5px'><%= link_to 'Yochats', admin_yochats_path %></div>
+<div style='float:right; margin:5px'><%= link_to 'Users', admin_users_path %></div>
+
+<h1>SeeYo Secrets</h1>
+<h2>List of Messages</h2>
+<%= render :partial => 'msg', :locals => { :messages => @messages } %>
+<hr/>
+<%= paginate @messages %>

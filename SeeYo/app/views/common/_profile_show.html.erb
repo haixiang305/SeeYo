@@ -1,0 +1,46 @@
+<legend>Profile</legend>
+<table class="mytable table-hover" id="profile_table">
+  <tr id="nickname">
+    <td class="text-right text-muted" width="100">Nickname</td>
+    <td><%= @user.information.username %></td>
+  </tr>
+  <tr id="email">
+    <td class="text-right text-muted" width="100">E-mail</td>
+    <td><%= @user.email %></td>
+  </tr>
+  <tr id="location">
+    <td class="text-right text-muted" width="100">Location</td>
+    <td><%= @user.information.location %></td>
+  </tr>
+  <tr id="gender">
+    <td class="text-right text-muted" width="100">Gender</td>
+    <td><%= @user.information.gender %></td>
+  </tr>
+  <tr id="birthday">
+    <td class="text-right text-muted" width="100">Birthday</td>
+    <td><%= @user.information.birthday %></td>
+  </tr>
+  <tr id="blog">
+    <td class="text-right text-muted" width="100">Blog</td>
+    <td><%= @user.information.blog %></td>
+  </tr>
+  <tr id="about">
+    <td class="text-right text-muted" width="100">About</td>
+    <td><%= @user.information.about %></td>
+  </tr>
+  <tr id="yo_year">
+    <td class="text-right text-muted" width="100">Yo-years</td>
+    <td><%= Time.now.year - @user.created_at.year %></td>
+  </tr>
+  <tr id="created_date">
+    <td class="text-right text-muted" width="100">Join on</td>
+    <td><%= @user.created_at.strftime("%d %b. %Y") %></td>
+  </tr>
+</table>
+<% if current_user.id == @user.id %>
+  <div class="row-fluid">
+    <div class="col-md-2 col-md-offset-5">
+      <%= button_to 'Edit', edit_user_path(@user, :operation => 0), remote: true, :method => :get, :class => "btn btn-default" %>
+    </div>
+  </div>
+<% end %>

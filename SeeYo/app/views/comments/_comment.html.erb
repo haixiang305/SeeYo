@@ -1,0 +1,24 @@
+<div class="row" id="comment_div<%= comment.id %>">
+  <div class="col-md-12">
+    <div class="row-fluid">
+      <div class="col-md-2">
+        <%= link_to image_tag(comment.user.information.avatar_url(:small), class:"img-rounded center-block", :width => IMG_SIZE_SMALL, :height => IMG_SIZE_SMALL), user_path(comment.user) %>
+      </div>
+      <div class="col-md-10">
+        <%= link_to comment.user.information.username, user_path(comment.user) %> : <span><%= comment.content %></span>
+        <p class="text-muted"><%= time_ago_in_words comment.created_at %> ago</p>
+        <div class="btn-group btn-group-justified" role="group" aria-label="...">
+          <div class="btn-group" role="group">
+            <%= button_to 'reply', edit_yochat_comment_path(@yochat, comment.user), remote: true, :method => :get, :class => "btn btn-default btn-xs" %>
+          </div>
+          <% if comment.user.id == @user.id %>
+          <div class="btn-group" role="group">
+          <%= button_to 'Delete', yochat_comment_path(comment.yochat, comment), :method => :delete, remote: true, :class => "btn btn-default btn-xs" %>
+          </div>
+          <% end %>
+        </div>
+        <hr />
+      </div>
+    </div>
+  </div>
+</div>

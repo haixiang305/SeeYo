@@ -1,0 +1,12 @@
+var symbol = $("#symbol_div")[0];
+
+$("#comment_submit_div" + symbol.className).html("");
+$("#comment_show_div" + symbol.className).html("");
+
+if (symbol.className != <%= @yochat.id %>) {
+  symbol.className = <%= @yochat.id %>;
+  $("#comment_submit_div<%= @yochat.id %>").html("<%= escape_javascript (render :partial => 'common/comment_submit') %>");
+  $("#comment_show_div<%= @yochat.id %>").html("<%= escape_javascript (render :partial => 'common/comment_show') %>");
+} else {
+  symbol.className = "-1";
+}

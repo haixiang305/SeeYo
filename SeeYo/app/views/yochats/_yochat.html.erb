@@ -1,0 +1,39 @@
+<div class="row-fluid" id="yochat_div<%= yochat.id %>" >
+  <div class="col-md-12">
+    <div class="row-fluid">
+      <div class="col-md-2">
+       <%= link_to image_tag(yochat.user.information.avatar_url(:normal), class:"img-rounded center-block", :width => IMG_SIZE_NORMAL, :height => IMG_SIZE_NORMAL), user_path(yochat.user) %>
+      </div>
+      <div class="col-md-10">
+        <%= link_to yochat.user.information.username, user_path(yochat.user) %>
+        <span style="float: right"><%= yochat.share_with.upcase %></span>
+        <p class="text-muted"> <%= time_ago_in_words yochat.created_at %> ago</p>
+        <p><%= yochat.content %></p>
+      </div>
+    </div>
+
+    <div class="row-fluid">
+      <div class="col-md-12">
+        <div class="btn-group btn-group-justified" role="group" aria-label="...">
+          <div class="btn-group" role="group">
+            <%= button_to 'Comment (' + yochat.comments.count.to_s + ')' , yochat_path(yochat), :method => :get, remote: true, :class => "btn btn-default btn-xs", :id => "comment_button" + yochat.id.to_s %>
+          </div>
+          <% if yochat.user.id == current_user.id %>
+          <div class="btn-group" role="group">
+            <%= button_to 'Delete', yochat_path(yochat), :method => :delete, remote: true, :class => "btn btn-default btn-xs" %>
+          </div>
+          <% end %>
+        </div>
+        <hr />
+        <div class="row-fluid">
+          <div class="col-md-12" id="comment_submit_div<%= yochat.id %>">
+          </div>
+        </div>
+        <div class="row-fluid">
+          <div class="col-md-12" id="comment_show_div<%= yochat.id %>" >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

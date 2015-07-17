@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= @page_title %></title>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="navbar-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">See Yo</a>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <%= render :partial => "common/usernav" %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container" id="container">
+    <br /><br /><br />
+    <!--<p style='background-color:#CFC; text-align:center; border-radius:7px'><%= flash[:notice] %></p>
+    <p style='background-color:#FCC; text-align:center; border-radius:7px'><%= flash[:alert] %></p>-->
+
+    <%= yield %>
+  </div>
+  <hr />
+  <footer>
+    <p class="text-center"><a href="#" target="_blank">z3y</a> 2015</p>
+  </footer>
+</body>
+</html>

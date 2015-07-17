@@ -1,0 +1,48 @@
+<div style='float:right; margin:5px'><%= link_to 'Logout', destroy_user_session_path, :method => 'delete' %></div>
+<div style='float:right; margin:5px'><%= link_to 'Messages', admin_messages_path %></div>
+<div style='float:right; margin:5px'><%= link_to 'Comments', admin_comments_path %></div>
+<div style='float:right; margin:5px'><%= link_to 'Yochats', admin_yochats_path %></div>
+<div style='float:right; margin:5px'><%= link_to 'Users', admin_users_path %></div>
+
+<h1>SeeYo Secrets</h1>
+<h2>List of Users</h2>
+
+<table style='box-shadow:5px 5px 20px #555'>
+    <thead style='background-color:#8F8; text-align: center'>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Active</th>
+            <th>Current Time</th>
+            <th>Current IP</th>
+            <th>Last time</th>
+            <th>Last IP</th>
+            <th colspan='2'>Mgmt.</th>
+        </tr>
+    </thead>
+    <tbody style='background-color:#CFC; text-align: center'>
+        <% @users.each do |user| %>
+        <tr>
+            <td><%= user.id %></td>
+            <td><%= user.information.username %></td>
+            <td><%= user.email %></td>
+            <td><%= user.sign_in_count %></td>
+            <td><%= user.current_sign_in_at %></td>
+            <td><%= user.current_sign_in_ip %></td>
+            <td><%= user.last_sign_in_at %></td>
+            <td><%= user.last_sign_in_ip %></td>
+            <% if user.is_admin? %>
+                <td style='text-align:center'>Admin</td>
+                <td style='text-align:center'><%= link_to 'Setting', edit_user_registration_path %></td>
+            <% else %>
+                <td><%= link_to 'show', admin_user_path(user) %>&nbsp;&nbsp;<%= link_to 'send', edit_admin_user_path(user) %>&nbsp;&nbsp;<%= link_to 'messages', admin_message_path(user) %></td>
+                <td><%= button_to 'Delete', admin_user_path(user), :method => 'delete' %></td>
+            <% end %>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+<br/><br/>
+<hr/>
+<%= paginate @users %>

@@ -1,0 +1,37 @@
+<% @page_title = "Sign up"%>
+<div class="row">
+  <div class="col-md-4 col-md-offset-4" >
+    <legend>Sign up</legend>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= devise_error_messages! %>
+
+    <div class="input-group">
+      <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+      <%= f.email_field :email, autofocus: true, :class => "form-control", :placeholder=> "Email address" %>
+    </div>
+    <br />
+    <div class="input-group">
+      <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+      <% if @validatable %>
+      <% @constrant = '(' + @minimum_password_length.to_s + 'characters minimum)' %>
+      <% end %>
+      <%= f.password_field :password, autocomplete: "off", :class => "form-control", :placeholder => "Password " + @constrant %>
+    </div>
+    <br />
+    <div class="input-group">
+      <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+      <%= f.password_field :password_confirmation, autocomplete: "off", :class => "form-control", :placeholder => "Password confirmation"%>
+    </div>
+    <br />
+
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4" >
+        <%= f.submit "Sign up", :class => "btn btn-default btn-block" %>
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
+    <% end %>
+
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<div class="container-fluid" id="MD">
+  <div class="row-fluid">
+    <div class="col-md-4">
+      <div class="row-fluid">
+        <div class="col-md-12">
+          <%= render :partial => "common/profile_simple" %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="row-fluid">
+        <div class="col-md-12" id="user_show_div">
+          <%= render :partial => "common/" + @render_name %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<div style='background-color: #DDF; padding: 10px; border-radius:5px'>
+    <p>user:&nbsp;<%= link_to @yochat.user.information.username, user_path(@yochat.user) %></p>
+    <p>content:&nbsp;<%= simple_format(@yochat.content) %></p>
+    <p>time:&nbsp;<%= @yochat.created_at %></p>
+    <p>comments:&nbsp;<%= @yochat.comments.count %></p>
+    <p><%= link_to 'alarm', edit_admin_yochat_path(@yochat) %><p>
+</div>
+<hr/>
+<% @comments.each do |comment| %>
+<div style='background-color: #FFC; margin:10px; margin-left: 20px; padding: 7px; border-radius: 5px'>
+    <strong>user:&nbsp;<%= link_to comment.user.username, user_path(comment.user) %>
+    <% if !comment.ater_id.nil? %>
+        <% ater= User.find_by_id(comment.ater_id) %>
+        <% if ater.nil? %>
+            <% comment.update(:ater_id => nil) %>
+        <% else %>
+            @&nbsp;<%= link_to ater.username, user_path(ater) %>
+        <% end %>
+    <% end %>
+    </strong>
+    <p>content:&nbsp;<%= simple_format(comment.content) %></p>
+    <p>time:&nbsp;<%= comment.created_at %></p>
+    <p><%= link_to 'alarm', edit_admin_comment_path(comment) %><p>
+</div>
+<% end %>
+<%= link_to '<<back', admin_yochats_path %>

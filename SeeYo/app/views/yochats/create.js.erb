@@ -1,0 +1,12 @@
+$("#publish_text_area").val("");
+$("#yochats_div").prepend("<%= escape_javascript(render @yochat) %>");
+$("#new_yochat").prepend("<%= escape_javascript(render :partial => 'common/float_window') %>");
+
+var cnt = parseInt($("#yochat_count").html()) + 1;
+$("#yochat_count").html(cnt.toString());
+
+$("#yochat_div<%= @yochat.id %>").hide();
+$("#yochat_div<%= @yochat.id %>").fadeIn(1500);
+$("#float_window_div").fadeIn();
+setTimeout("$('#float_window_div').fadeOut()", 1000);
+setTimeout("$('#float_window_div').remove()", 1500);

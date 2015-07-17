@@ -1,0 +1,19 @@
+== README ==
+
+本项目基于Ubuntu开发与运行，不保证在Windows系统能正常运行。
+运行之前请先根据 https://ihower.tw/rails4/installation.html 配置好开发环境
+
+配置完成以后，在SeeYo/目录下执行:
+  bundle install
+  bin/rake db:migrate
+然后执行
+  bin/rails s
+即可启动该项目，在浏览器地址栏输入localhost:3000可进入
+
+默认是使用3000端口的开发者模式如需指定，8080端口，和发布者模式，则可加入参数：
+  bin/rails s -p 8080 -e production
+
+开发环境版本说明：
+  Ruby version ：2.1.5p273
+  Rails version : 4.2.1
+  System dependencies : Ubuntu

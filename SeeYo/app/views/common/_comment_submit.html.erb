@@ -1,0 +1,17 @@
+<div class="row-fluid">
+	<div class="col-md-2">
+		<%= image_tag(current_user.information.avatar_url(:small)) %>
+	</div>
+    <%= form_for @comment, remote: true, :url => yochat_comments_path(@yochat) do |f| %>
+	<div class="col-md-10">
+      <div class="input-group">
+        <%= f.text_field :ater_id, :style => "display:none" %>
+        <%= f.text_area :content, :rows => 1, :placeholder => "Comment...", :style => "resize:none", :class => "form-control", :id => "comment_submit_area" %>
+        <span class="input-group-btn">
+          <%= f.submit 'Publish', :class => "btn btn-lg btn-default" %>
+        </span>
+      </div>
+	</div>
+    <% end %>
+	<br /><br /><hr />
+</div>

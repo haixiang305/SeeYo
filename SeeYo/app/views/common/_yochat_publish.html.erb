@@ -1,0 +1,9 @@
+<%= form_for @yochat, remote: true, :url => yochats_path do |f| %>
+  <%= f.text_area :content, :rows => 3, :placeholder => "Say something...", :style => "resize:none", :class => "form-control", :id => "publish_text_area" %>
+  <p class="text-right"><%= f.label :share_with, 'Share with:' %>
+  <%= f.radio_button :share_with, 'public', :checked => true%>public
+  <%= f.radio_button :share_with, 'zone' %>zone
+  <%= f.radio_button :share_with, 'circle' %>circle
+  <%= f.radio_button :share_with, 'private' %>private
+  <%= f.submit 'Publish', :class => "btn btn-primary" %></p>
+<% end %>

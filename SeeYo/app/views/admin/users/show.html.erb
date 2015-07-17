@@ -1,0 +1,12 @@
+<div style='float:right; margin:5px'><%= link_to 'Add Massage', edit_admin_user_path(@user) %></div>
+<div style='float:right; margin:5px'><%= link_to 'Back', admin_users_path %></div>
+
+<h1><%= @user.information.username %></h1>
+<p>about:<%= @info.about %></p>
+<ul>
+    <li>gender:<%= @info.gender %></li>
+    <li>location:<%= @info.location %></li>
+    <li>birthday:<%= @info.birthday %></li>
+    <li>blog:<%= @info.blog %></li>
+    <li>interests: <%= @info.interests.pluck(:name).join(', ') %></li>
+</ul>
